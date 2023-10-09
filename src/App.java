@@ -1,11 +1,38 @@
+import java.util.ArrayList;
 import java.util.EmptyStackException;
+import java.util.HashSet;
 
 public class App {
     public static void main(String[] args) {
         testArrayStack();
 
-        
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        list.add(14);
+        list.add(24);
+        list.add(14);
+        list.add(42);
+        list.add(25);
+
+        ArrayList<Integer> newList = removeDuplicates(list);
+
+        System.out.println(newList);
     }
+
+    public static <E> ArrayList<E> removeDuplicates(ArrayList<E> list) {
+        HashSet<E> previousElemnts = new HashSet<E>();
+
+        for(int i = 0; i < list.size(); i++) {
+            if(previousElemnts.contains(list.get(i))) {
+                list.remove(i);
+            }
+            else {
+                previousElemnts.add(list.get(i));
+            }
+        }
+
+        return list;
+    }
+
     public static void testArrayStack() {
     GenericStack<Integer> stack = new GenericStack<>(3);
     
