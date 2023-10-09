@@ -25,7 +25,8 @@ public class GenericStack<E> {
     public void push(E o) {
         //check size, if full create new arr that is double the size and copy
         if(size == capacity) {
-            capacity *= 2;
+            if(capacity == 0) capacity = 1;
+            else capacity *= 2;
             E[] newList = (E[]) new Object[capacity];
             System.arraycopy(list, 0, newList, 0, capacity / 2);
             list = newList;

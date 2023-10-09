@@ -1,11 +1,37 @@
 import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.HashSet;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
         testArrayStack();
 
+        removeDuplicatesDriver();
+
+        assertNumberInRange();
+    }
+
+    public static void assertNumberInRange() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter a number between 0 and 10: ");
+
+        try {
+            int num = scanner.nextInt();
+            assert num >= 0 && num <= 10: "Value should be in the range of 0 and 10";
+            System.out.println("The number you entered was: " + num);
+        }
+        catch(InputMismatchException e) {
+            System.out.println("The input provided was not an integer");
+        }
+        catch (AssertionError e) {
+            System.out.println(e);
+        }
+        scanner.close();
+    }
+
+    public static void removeDuplicatesDriver() {
         ArrayList<Integer> list = new ArrayList<Integer>();
         list.add(14);
         list.add(24);
@@ -70,16 +96,9 @@ public class App {
     for (int i = 0; i < 10; i++) {
         stack.push(i);
     }
-    assert stack.pop() == 9;
-    assert stack.pop() == 8;
-    assert stack.pop() == 7;
-    assert stack.pop() == 6;
-    assert stack.pop() == 5;
-    assert stack.pop() == 4;
-    assert stack.pop() == 3;
-    assert stack.pop() == 2;
-    assert stack.pop() == 1;
-    assert stack.pop() == 0;
+    for(int i = 9; i >= 0; i--) {
+        assert stack.pop() == i;
+    }
     assert stack.isEmpty();
     
     // test popping from an empty stack
